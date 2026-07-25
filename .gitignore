@@ -1,0 +1,55 @@
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# C/C++ and CMake
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# ROS 2 / colcon
+build/
+install/
+log/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs, temporary files, and backups
+*.log
+*.tmp
+*.temp
+*.bak
+*~
+.cache/
+
+# Generated reports and large raw media
+reports/generated/
+videos/raw/
