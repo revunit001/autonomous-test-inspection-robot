@@ -69,6 +69,39 @@ Additional directories will be added only when they become useful.
 4. Failures and lessons learned are documented honestly.
 5. Major milestones produce code, documentation, test evidence, and a demonstration.
 
+## Internationalization
+
+The software is being designed with internationalization (i18n) in mind from the beginning rather than treating multilingual support as a later enhancement. This is planned and not completed.
+
+- [Project Languages](docs/LANGUAGES.md)
+- [Translation Guide](docs/TRANSLATION_GUIDE.md)
+
+Project goals include:
+
+- Unicode support throughout the application
+- External language resource files
+- Easy addition of new languages without modifying application code
+- Support for both left-to-right and right-to-left languages
+- Separation of technical identifiers from user-facing text
+
+
+### Planned Languages
+
+| Language | Code | Status |
+|-----------|------|--------|
+| English | en | Primary |
+| German | de | Planned |
+| Slovak | sk | Planned |
+| Spanish | es | Planned |
+| Chinese (Simplified) | zh-CN | Planned |
+| Japanese | ja | Planned |
+| Khmer | km | Planned |
+| Tagalog | tl | Planned |
+| Hindi | hi | Planned |
+| Arabic | ar | Planned |
+
+English is the project's authoritative language. Additional translations will be added as the software and documentation mature. Community review by native speakers is encouraged for future translations.
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
