@@ -23,9 +23,21 @@ The technology stack may change as engineering decisions are evaluated and docum
 
 ## Current Status
 
-**Phase 0: Project definition and repository setup**
+**Phase 1: Software Foundation — In Progress**
 
-Current work includes establishing the repository structure, documenting the development philosophy and AI-assisted workflow, recording major engineering decisions, and preparing initial requirements and architecture documents.
+The project currently includes:
+
+- ROS 2 Jazzy development environment on Ubuntu 24.04 LTS
+- Initial ROS 2 workspace and package structure
+- `inspection_robot_bringup` package
+- `robot_status_node` for publishing robot operating state
+- `/robot_status` topic using ROS 2 publisher/subscriber communication
+- Initial robot states: `INITIALIZING`, `READY`, `INSPECTING`, `FAULT`, and `SHUTDOWN`
+- Automatic `INITIALIZING` → `READY` state transition
+
+### Next Milestone
+
+Develop inter-node robot control so that operating-state transitions can be requested and managed through ROS 2 communication.
 
 ## Planned Development Phases
 
