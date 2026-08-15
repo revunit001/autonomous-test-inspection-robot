@@ -30,14 +30,19 @@ The project currently includes:
 - ROS 2 Jazzy development environment on Ubuntu 24.04 LTS
 - Initial ROS 2 workspace and package structure
 - `inspection_robot_bringup` package
-- `robot_status_node` for publishing robot operating state
-- `/robot_status` topic using ROS 2 publisher/subscriber communication
+- `robot_status_node` for publishing and managing robot operating state
+- `robot_command_node` for issuing robot commands
+- `/robot_status` topic for publishing the current operating state
+- `/robot_command` topic for inter-node command communication
 - Initial robot states: `INITIALIZING`, `READY`, `INSPECTING`, `FAULT`, and `SHUTDOWN`
 - Automatic `INITIALIZING` → `READY` state transition
+- Command-driven `READY` → `INSPECTING` state transition
+- ROS 2 publisher/subscriber communication between robot nodes
+- Subscriber discovery before command transmission
 
 ### Next Milestone
 
-Develop inter-node robot control so that operating-state transitions can be requested and managed through ROS 2 communication.
+Expand robot command and state management, including additional state transitions and validation, as a foundation for future hardware, navigation, and inspection functionality.
 
 ## Planned Development Phases
 

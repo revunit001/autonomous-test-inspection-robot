@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'robot_status_node = inspection_robot_bringup.robot_status_node:main'
+            'robot_status_node = inspection_robot_bringup.robot_status_node:main',
+            'robot_command_node = inspection_robot_bringup.robot_command_node:main',
         ],
     },
 )

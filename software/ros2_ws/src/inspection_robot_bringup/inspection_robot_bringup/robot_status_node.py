@@ -23,6 +23,13 @@ class RobotStatusNode(Node):
             10
         )
 
+        self.command_subscription_ = self.create_subscription(
+            String,
+            'robot_command',
+            self.command_callback,
+            10
+        )
+
         self.timer_ = self.create_timer(
             1.0,
             self.publish_status
@@ -69,6 +76,25 @@ class RobotStatusNode(Node):
 
         self.status_ = new_status
 
+    def command_callback(self, message):
+        """Handle incoming robot commands."""
+
+        command = message.data
+
+        self.get_logger().info(
+            f'Received command: {command}'
+        )
+
+        if command == 'START_INSPECTION' and self.status_ == 'READY':
+            self.set_status('INSPECTING')
+
+        elif command == 'STOP_INSPECTION' and self.status_ == 'INSPECTING':
+            self.set_status('READY')
+
+        else:
+            self.get_logger().warning(
+                f'Command {command} is not valid while robot is {self.status_}'
+            ) 
 
 def main(args=None):
     rclpy.init(args=args)
