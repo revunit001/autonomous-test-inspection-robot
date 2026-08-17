@@ -35,6 +35,7 @@ When a translation differs from the English source, the English version controls
 | Tagalog | tl | Planned |
 | Hindi | hi | Planned |
 | Arabic | ar | Planned |
+| Russion | ru | Planned |
 
 ## Translation Principles
 
@@ -73,4 +74,5 @@ docs/
 ├── km/
 ├── tl/
 ├── hi/
-└── ar/
+├── ar/
+└── ru/

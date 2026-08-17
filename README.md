@@ -116,6 +116,7 @@ Project goals include:
 | Tagalog | tl | Planned |
 | Hindi | hi | Planned |
 | Arabic | ar | Planned |
+| Russion | ru | Planned |
 
 English is the project's authoritative language. Additional translations will be added as the software and documentation mature. Community review by native speakers is encouraged for future translations.
 

@@ -16,5 +16,6 @@ English is the authoritative language for project requirements, engineering deci
 | Tagalog | `tl` | [Basahin](tl/PROJECT_OVERVIEW.md) | Planned |
 | Hindi / हिन्दी | `hi` | [पढ़ें](hi/PROJECT_OVERVIEW.md) | Planned |
 | Arabic / العربية | `ar` | [اقرأ](ar/PROJECT_OVERVIEW.md) | Planned |
+| Russian / Русский | `ru` | [Читать](ru/PROJECT_OVERVIEW.md) | Planned |
 
 See the [Translation Guide](TRANSLATION_GUIDE.md) for translation and review practices.
