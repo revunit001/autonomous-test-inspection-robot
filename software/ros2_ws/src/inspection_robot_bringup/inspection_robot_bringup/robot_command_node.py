@@ -21,7 +21,6 @@ class RobotCommandNode(Node):
 
     def send_command(self, command):
         """Publish a robot command."""
-
         message = String()
         message.data = command
 
@@ -30,6 +29,7 @@ class RobotCommandNode(Node):
         self.get_logger().info(
             f'Command sent: {command}'
         )
+
 
 def main(args=None):
     rclpy.init(args=args)

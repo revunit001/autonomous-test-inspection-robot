@@ -4,7 +4,7 @@ from std_msgs.msg import String
 
 
 class RobotStatusNode(Node):
-    """Publishes the current operating state of the inspection robot."""
+    """Manage and publish the operating state of the inspection robot."""
 
     VALID_STATES = {
         'INITIALIZING',
@@ -12,6 +12,22 @@ class RobotStatusNode(Node):
         'INSPECTING',
         'FAULT',
         'SHUTDOWN',
+    }
+
+    ALLOWED_TRANSITIONS = {
+        'INITIALIZING': {'READY', 'FAULT'},
+        'READY': {'INSPECTING', 'FAULT', 'SHUTDOWN'},
+        'INSPECTING': {'READY', 'FAULT'},
+        'FAULT': {'READY', 'SHUTDOWN'},
+        'SHUTDOWN': set(),
+    }
+
+    COMMAND_TRANSITIONS = {
+        'START_INSPECTION': 'INSPECTING',
+        'STOP_INSPECTION': 'READY',
+        'REPORT_FAULT': 'FAULT',
+        'RESET_FAULT': 'READY',
+        'SHUTDOWN': 'SHUTDOWN',
     }
 
     def __init__(self):
@@ -44,7 +60,6 @@ class RobotStatusNode(Node):
 
     def publish_status(self):
         """Publish the robot's current operating state."""
-
         message = String()
         message.data = self.status_
 
@@ -61,40 +76,54 @@ class RobotStatusNode(Node):
         ):
             self.set_status('READY')
 
-    def set_status(self, new_status):
-        """Change the robot state if the requested state is valid."""
+    def command_callback(self, message):
+        """Process an incoming robot command."""
+        command = message.data.strip().upper()
 
+        self.get_logger().info(
+            f'Received command: {command}'
+        )
+
+        if command not in self.COMMAND_TRANSITIONS:
+            self.get_logger().warning(
+                f'Unknown robot command: {command}'
+            )
+            return
+
+        requested_status = self.COMMAND_TRANSITIONS[command]
+
+        self.set_status(requested_status)
+
+    def set_status(self, new_status):
+        """Change robot state only when the transition is valid."""
         if new_status not in self.VALID_STATES:
             self.get_logger().error(
                 f'Invalid robot state requested: {new_status}'
             )
-            return
+            return False
+
+        if new_status == self.status_:
+            self.get_logger().warning(
+                f'Robot is already in state: {new_status}'
+            )
+            return False
+
+        allowed_states = self.ALLOWED_TRANSITIONS[self.status_]
+
+        if new_status not in allowed_states:
+            self.get_logger().warning(
+                f'Illegal state transition: '
+                f'{self.status_} -> {new_status}'
+            )
+            return False
 
         self.get_logger().info(
             f'State transition: {self.status_} -> {new_status}'
         )
 
         self.status_ = new_status
+        return True
 
-    def command_callback(self, message):
-        """Handle incoming robot commands."""
-
-        command = message.data
-
-        self.get_logger().info(
-            f'Received command: {command}'
-        )
-
-        if command == 'START_INSPECTION' and self.status_ == 'READY':
-            self.set_status('INSPECTING')
-
-        elif command == 'STOP_INSPECTION' and self.status_ == 'INSPECTING':
-            self.set_status('READY')
-
-        else:
-            self.get_logger().warning(
-                f'Command {command} is not valid while robot is {self.status_}'
-            ) 
 
 def main(args=None):
     rclpy.init(args=args)

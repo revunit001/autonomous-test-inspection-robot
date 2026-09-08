@@ -39,10 +39,13 @@ The project currently includes:
 - Command-driven `READY` → `INSPECTING` state transition
 - ROS 2 publisher/subscriber communication between robot nodes
 - Subscriber discovery before command transmission
+- Defined and enforced legal robot state transitions
+- Command validation for inspection, fault, reset, and shutdown operations
+- Invalid and unsafe state transitions are rejected
 
 ### Next Milestone
 
-Expand robot command and state management, including additional state transitions and validation, as a foundation for future hardware, navigation, and inspection functionality.
+Introduce simulated hardware telemetry so robot state can respond to system conditions such as sensor health, motor availability, and battery status.
 
 ## Planned Development Phases
 
@@ -116,7 +119,7 @@ Project goals include:
 | Tagalog | tl | Planned |
 | Hindi | hi | Planned |
 | Arabic | ar | Planned |
-| Russion | ru | Planned |
+| Russian | ru | Planned |
 
 English is the project's authoritative language. Additional translations will be added as the software and documentation mature. Community review by native speakers is encouraged for future translations.
 
