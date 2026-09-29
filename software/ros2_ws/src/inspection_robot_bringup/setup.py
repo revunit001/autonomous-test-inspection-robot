@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'robot_status_node = inspection_robot_bringup.robot_status_node:main',
             'robot_command_node = inspection_robot_bringup.robot_command_node:main',
+            'robot_telemetry_node = inspection_robot_bringup.robot_telemetry_node:main',
         ],
     },
 )

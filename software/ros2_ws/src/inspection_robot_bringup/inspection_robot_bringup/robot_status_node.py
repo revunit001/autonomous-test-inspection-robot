@@ -46,6 +46,13 @@ class RobotStatusNode(Node):
             10
         )
 
+        self.telemetry_subscription_ = self.create_subscription(
+            String,
+            'robot_telemetry',
+            self.telemetry_callback,
+            10
+        )
+
         self.timer_ = self.create_timer(
             1.0,
             self.publish_status
@@ -123,6 +130,47 @@ class RobotStatusNode(Node):
 
         self.status_ = new_status
         return True
+
+    def telemetry_callback(self, message):
+        """Process incoming robot telemetry."""
+        telemetry = message.data.strip()
+
+        try:
+            values = {}
+
+            for item in telemetry.split(';'):
+                key, value = item.split('=')
+                values[key] = value
+
+            battery_level = int(values['BATTERY'])
+            motor_status = values['MOTOR']
+            sensor_status = values['SENSOR']
+
+            self.get_logger().info(
+                f'Telemetry - Battery: {battery_level}%, '
+                f'Motor: {motor_status}, '
+                f'Sensor: {sensor_status}'
+            )
+
+            if motor_status == 'FAULT' and self.status_ != 'FAULT':
+                self.get_logger().error(
+                    'Motor fault detected from telemetry.'
+                )
+                self.set_status('FAULT')
+            elif sensor_status == 'FAULT' and self.status_ != 'FAULT':
+                self.get_logger().error(
+                    'Sensor fault detected from telemetry.'
+                )
+                self.set_status('FAULT')
+            elif battery_level <= 20 and self.status_ != 'FAULT':
+                self.get_logger().error(
+                    f'Low battery detected: {battery_level}%.'
+                )
+                self.set_status('FAULT')
+        except (ValueError, KeyError):
+            self.get_logger().error(
+                f'Invalid telemetry received: {telemetry}'
+            )
 
 
 def main(args=None):

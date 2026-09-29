@@ -42,10 +42,19 @@ The project currently includes:
 - Defined and enforced legal robot state transitions
 - Command validation for inspection, fault, reset, and shutdown operations
 - Invalid and unsafe state transitions are rejected
+- Added `robot_telemetry_node` for simulated hardware telemetry
+- Added `/robot_telemetry` topic for hardware-status communication
+- Publishes battery level, motor availability, and sensor health
+- `robot_status_node` receives and parses telemetry
+- Motor and sensor faults automatically trigger `FAULT`
+- Battery level of 20% or lower automatically triggers `FAULT`
+- Telemetry-triggered transitions use the existing validated state machine
+- Verified battery boundary behavior: 20% triggers `FAULT`; 21% remains operational
+- Automated Python lint and docstring tests pass; copyright validation remains intentionally skipped for later
 
 ### Next Milestone
 
-Introduce simulated hardware telemetry so robot state can respond to system conditions such as sensor health, motor availability, and battery status.
+Improve telemetry architecture by introducing structured ROS 2 interfaces and expanding automated testing of robot state and fault-handling behavior.
 
 ## Planned Development Phases
 
@@ -66,9 +75,15 @@ Introduce simulated hardware telemetry so robot state can respond to system cond
 ├── docs/
 │   ├── AI_USAGE.md
 │   ├── DEVELOPMENT_PHILOSOPHY.md
-│   └── ENGINEERING_DECISIONS.md
+│   ├── ENGINEERING_DECISIONS.md
+│   ├── LANGUAGES.md
+│   ├── TRANSLATION_GUIDE.md
+│   └── [language directories]/
 ├── hardware/
 ├── software/
+│   └── ros2_ws/
+│       └── src/
+│           └── inspection_robot_bringup/
 ├── images/
 └── reports/
 ```
