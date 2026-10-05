@@ -2,8 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>inspection_robot_bringup</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <version>0.1.0</version>
+  <description>ROS 2 bringup package for robot state management, command handling, and simulated hardware telemetry.</description>
   <maintainer email="revunit001@gmail.com">revunit001</maintainer>
   <license>MIT</license>
 

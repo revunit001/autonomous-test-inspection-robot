@@ -4,7 +4,7 @@ package_name = 'inspection_robot_bringup'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.1.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -15,7 +15,10 @@ setup(
     zip_safe=True,
     maintainer='revunit001',
     maintainer_email='revunit001@gmail.com',
-    description='TODO: Package description',
+    description=(
+        'ROS 2 bringup package for robot state management, command handling, '
+        'and simulated hardware telemetry.'
+    ),
     license='MIT',
     extras_require={
         'test': [
